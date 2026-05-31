@@ -18,7 +18,7 @@ const Dashboard = () => {
       try {
         const token = localStorage.getItem('jwt_token');
         if (!token) return;
-        const res = await fetch('http://140.245.251.56/api/moods', {
+        const res = await fetch('https://140.245.251.56.sslip.io/api/moods', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (res.ok) {

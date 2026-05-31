@@ -19,7 +19,7 @@ const SignIn = () => {
     setError('');
     setSuccessMsg('');
     try {
-      const response = await fetch('http://140.245.251.56/forgot-password', {
+      const response = await fetch('https://140.245.251.56.sslip.io/forgot-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
@@ -42,7 +42,7 @@ const SignIn = () => {
     setIsLoading(true);
     
     try {
-      const response = await fetch('http://140.245.251.56/login', {
+      const response = await fetch('https://140.245.251.56.sslip.io/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

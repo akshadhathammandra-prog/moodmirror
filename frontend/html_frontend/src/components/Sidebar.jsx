@@ -11,7 +11,7 @@ const Sidebar = () => {
     try {
       const token = localStorage.getItem('jwt_token');
       if (!token) return;
-      const response = await fetch('http://140.245.251.56/api/user/profile', {
+      const response = await fetch('https://140.245.251.56.sslip.io/api/user/profile', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (response.ok) {

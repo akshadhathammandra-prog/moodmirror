@@ -140,7 +140,7 @@ const AudioCheckIn = () => {
       const token = localStorage.getItem('jwt_token');
 
       const response = await fetch(
-       "http://140.245.251.56/predict-audio",
+       "https://140.245.251.56.sslip.io/predict-audio",
         {
           method: "POST",
           headers: {

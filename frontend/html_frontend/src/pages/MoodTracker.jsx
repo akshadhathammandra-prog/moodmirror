@@ -12,7 +12,7 @@ const MoodTracker = () => {
       try {
         const token = localStorage.getItem('jwt_token');
         if (!token) return;
-        const res = await fetch('http://140.245.251.56/api/moods', {
+        const res = await fetch('https://140.245.251.56.sslip.io/api/moods', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (res.ok) {
@@ -31,7 +31,7 @@ const MoodTracker = () => {
     try {
       const token = localStorage.getItem('jwt_token');
       if (!token) return;
-      await fetch('http://140.245.251.56/api/moods', {
+      await fetch('https://140.245.251.56.sslip.io/api/moods', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(newEntries)

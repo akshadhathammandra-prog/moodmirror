@@ -15,7 +15,7 @@ const TextCheckIn = () => {
     setIsSubmitting(true);
     try {
       const token = localStorage.getItem('jwt_token');
-      const response = await fetch("http://140.245.251.56/predict-text",
+      const response = await fetch("https://140.245.251.56.sslip.io/predict-text",
       {
         method: "POST",
 

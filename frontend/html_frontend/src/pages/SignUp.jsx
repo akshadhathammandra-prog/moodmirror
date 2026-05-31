@@ -14,7 +14,7 @@ const SignUp = () => {
     setIsLoading(true);
     
     try {
-      const response = await fetch('http://140.245.251.56/signup', {
+      const response = await fetch('https://140.245.251.56.sslip.io/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

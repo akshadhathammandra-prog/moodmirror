@@ -27,7 +27,7 @@ services:
   worker:
     image: moodmirror_backend
     container_name: moodmirror_worker
-    command: ["celery", "-A", "worker.celery", "worker", "--loglevel=info"]
+    command: ["celery", "-A", "celery_worker.celery_app", "worker", "--loglevel=info"]
     volumes:
       - ./backend/models:/app/models
     env_file:
