@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #0A3323; /* block.text */
+    background-color: #F5F5DC; /* Light Beige */
+    min-height: 100vh;
+    line-height: 1.6;
+    background-image: none; /* NO GRADIENTS */
+  }
+}
+
+@layer components {
+  .clean-card {
+    /* Base style, background color is added specifically per card via React classes */
+    @apply border border-[#0A3323]/5 rounded-2xl shadow-[0_4px_12px_rgba(10,51,35,0.04)] transition-transform duration-300;
+  }
+  
+  .clean-card:hover {
+    @apply -translate-y-1 shadow-[0_6px_16px_rgba(10,51,35,0.06)];
+  }
+
+  .btn-primary {
+    @apply bg-[#0A3323] text-white font-semibold rounded-full px-6 py-3 transition-colors duration-200 hover:bg-[#105666] disabled:opacity-50 disabled:cursor-not-allowed shadow-sm;
+  }
+
+  .btn-secondary {
+    @apply bg-white border-2 border-[#0A3323] text-[#0A3323] font-semibold rounded-full px-6 py-3 transition-colors duration-200 hover:bg-[#F7F4D5] shadow-sm;
+  }
+
+  .form-input-clean {
+    @apply w-full bg-white border-2 border-gray-200 rounded-xl px-5 py-3 text-[#0A3323] outline-none transition-all duration-200 focus:border-[#0A3323] focus:ring-0;
+  }
+}
+
+/* Custom Webkit Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-[#0A3323]/20 rounded-full transition-colors;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-[#0A3323]/40;
+}

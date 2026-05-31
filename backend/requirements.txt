@@ -1,0 +1,9 @@
+Flask
+flask-cors
+PyJWT
+bcrypt
+python-dotenv
+celery
+imageio-ffmpeg
+pymongo
+SpeechRecognition
