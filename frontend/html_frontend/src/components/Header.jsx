@@ -28,8 +28,8 @@ const Header = () => {
       if (!token) return;
 
       const [moodsRes, notifsRes] = await Promise.all([
-        fetch('http://127.0.0.1:5000/api/moods', { headers: { 'Authorization': `Bearer ${token}` } }),
-        fetch('http://127.0.0.1:5000/api/notifications', { headers: { 'Authorization': `Bearer ${token}` } })
+        fetch('http://140.245.251.56/api/moods', { headers: { 'Authorization': `Bearer ${token}` } }),
+        fetch('http://140.245.251.56/api/notifications', { headers: { 'Authorization': `Bearer ${token}` } })
       ]);
 
       const entries = await moodsRes.json();
@@ -90,7 +90,7 @@ const Header = () => {
   const updateReadNotifications = async (newIds) => {
     try {
       const token = localStorage.getItem('jwt_token');
-      await fetch('http://127.0.0.1:5000/api/notifications', {
+      await fetch('http://140.245.251.56/api/notifications', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ read_notifications: newIds })
@@ -102,7 +102,7 @@ const Header = () => {
     const currentIds = notifications.map(n => n.id);
     try {
       const token = localStorage.getItem('jwt_token');
-      const res = await fetch('http://127.0.0.1:5000/api/notifications', { headers: { 'Authorization': `Bearer ${token}` } });
+      const res = await fetch('http://140.245.251.56/api/notifications', { headers: { 'Authorization': `Bearer ${token}` } });
       const existingRead = await res.json();
       const updatedRead = [...new Set([...existingRead, ...currentIds])];
       await updateReadNotifications(updatedRead);
@@ -113,7 +113,7 @@ const Header = () => {
   const markSingleAsRead = async (id) => {
     try {
       const token = localStorage.getItem('jwt_token');
-      const res = await fetch('http://127.0.0.1:5000/api/notifications', { headers: { 'Authorization': `Bearer ${token}` } });
+      const res = await fetch('http://140.245.251.56/api/notifications', { headers: { 'Authorization': `Bearer ${token}` } });
       const existingRead = await res.json();
       if (!existingRead.includes(id)) {
         await updateReadNotifications([...existingRead, id]);

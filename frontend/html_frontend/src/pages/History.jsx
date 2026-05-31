@@ -17,8 +17,8 @@ const History = () => {
         if (!token) return;
 
         const [moodsRes, historyRes] = await Promise.all([
-          fetch('http://127.0.0.1:5000/api/moods', { headers: { 'Authorization': `Bearer ${token}` } }),
-          fetch('http://127.0.0.1:5000/api/history', { headers: { 'Authorization': `Bearer ${token}` } })
+          fetch('http://140.245.251.56/api/moods', { headers: { 'Authorization': `Bearer ${token}` } }),
+          fetch('http://140.245.251.56/api/history', { headers: { 'Authorization': `Bearer ${token}` } })
         ]);
 
         if (moodsRes.ok) {

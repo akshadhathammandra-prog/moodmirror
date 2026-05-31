@@ -15,7 +15,7 @@ const TextCheckIn = () => {
     setIsSubmitting(true);
     try {
       const token = localStorage.getItem('jwt_token');
-      const response = await fetch("http://127.0.0.1:5000/predict-text",
+      const response = await fetch("http://140.245.251.56/predict-text",
       {
         method: "POST",
 

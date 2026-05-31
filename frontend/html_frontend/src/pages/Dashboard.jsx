@@ -18,7 +18,7 @@ const Dashboard = () => {
       try {
         const token = localStorage.getItem('jwt_token');
         if (!token) return;
-        const res = await fetch('http://127.0.0.1:5000/api/moods', {
+        const res = await fetch('http://140.245.251.56/api/moods', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (res.ok) {

@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: moodmirror_rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    restart: unless-stopped
+
+  web:
+    image: moodmirror_backend
+    container_name: moodmirror_web
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend/models:/app/models
+    env_file:
+      - ./backend/.env
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+    depends_on:
+      - rabbitmq
+    restart: unless-stopped
+
+  worker:
+    image: moodmirror_backend
+    container_name: moodmirror_worker
+    command: ["celery", "-A", "worker.celery", "worker", "--loglevel=info"]
+    volumes:
+      - ./backend/models:/app/models
+    env_file:
+      - ./backend/.env
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+    depends_on:
+      - rabbitmq
+    restart: unless-stopped
