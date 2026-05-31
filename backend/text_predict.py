@@ -6,13 +6,21 @@ from textblob import TextBlob
 
 model_path = "models/text_model"
 
-tokenizer = AutoTokenizer.from_pretrained(
-    model_path,
-    use_fast=False
-)
-model = AutoModelForSequenceClassification.from_pretrained(model_path)
+model = None
+tokenizer = None
 
-model.eval()
+def load_text_models_if_needed():
+    global model, tokenizer
+    if model is not None and tokenizer is not None:
+        return True
+    try:
+        tokenizer = AutoTokenizer.from_pretrained(model_path, use_fast=False)
+        model = AutoModelForSequenceClassification.from_pretrained(model_path)
+        model.eval()
+        return True
+    except Exception as e:
+        print(f"Failed to load text model: {e}")
+        return False
 
 def clean_text(text):
     text = str(text).lower()
@@ -21,7 +29,9 @@ def clean_text(text):
     return text
 
 def predict_text_depression(text):
-
+    if not load_text_models_if_needed():
+        return {"score": 0, "severity": "Backend Error (Text Model not loaded)"}
+        
     text = clean_text(text)
 
     inputs = tokenizer(

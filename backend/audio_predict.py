@@ -48,22 +48,30 @@ model_path = "models/audio_model"
 model = None
 processor = None
 
-try:
-    logger.info("Initializing Wav2Vec2 Processor...")
-    processor = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-base")
-    
-    logger.info("Initializing Wav2Vec2Regression Model Architecture...")
-    model = Wav2Vec2Regression()
-    
-    logger.info("Loading safetensors weights into model...")
-    state_dict = load_file(f"{model_path}/model.safetensors")
-    model.load_state_dict(state_dict, strict=False)
-    
-    model.to(device)
-    model.eval()
-    logger.info("Audio Model successfully loaded into memory.")
-except Exception as e:
-    logger.error(f"Failed to load audio model: {e}")
+def load_models_if_needed():
+    global model, processor
+    if model is not None and processor is not None:
+        return True
+        
+    try:
+        logger.info("Initializing Wav2Vec2 Processor...")
+        processor = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-base")
+        
+        logger.info("Initializing Wav2Vec2Regression Model Architecture...")
+        global_model = Wav2Vec2Regression()
+        
+        logger.info("Loading safetensors weights into model...")
+        state_dict = load_file(f"{model_path}/model.safetensors")
+        global_model.load_state_dict(state_dict, strict=False)
+        
+        global_model.to(device)
+        global_model.eval()
+        model = global_model
+        logger.info("Audio Model successfully loaded into memory.")
+        return True
+    except Exception as e:
+        logger.error(f"Failed to load audio model: {e}")
+        return False
 
 # ============================================
 # ROBUST FFMPEG AUDIO LOADER
@@ -93,8 +101,7 @@ def load_audio_robust(filepath):
 # PREDICTION LOGIC
 # ============================================
 def predict_audio_depression(audio_path):
-    if model is None or processor is None:
-        logger.error("Model or processor is not loaded. Cannot predict.")
+    if not load_models_if_needed():
         return {"score": 0, "severity": "Backend Error (Model not loaded)"}
 
     if not os.path.exists(audio_path):

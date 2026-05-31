@@ -15,7 +15,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./backend/models:/app/models
+      - ./backend:/app
     env_file:
       - ./backend/.env
     environment:
@@ -29,7 +29,7 @@ services:
     container_name: moodmirror_worker
     command: ["celery", "-A", "celery_worker.celery_app", "worker", "--loglevel=info"]
     volumes:
-      - ./backend/models:/app/models
+      - ./backend:/app
     env_file:
       - ./backend/.env
     environment:
