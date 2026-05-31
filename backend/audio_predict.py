@@ -50,7 +50,7 @@ processor = None
 
 try:
     logger.info("Initializing Wav2Vec2 Processor...")
-    processor = Wav2Vec2Processor.from_pretrained(model_path)
+    processor = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-base")
     
     logger.info("Initializing Wav2Vec2Regression Model Architecture...")
     model = Wav2Vec2Regression()
