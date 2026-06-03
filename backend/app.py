@@ -123,7 +123,7 @@ def login():
         return jsonify({"error": "Invalid email or password"}), 401
         
     token = jwt.encode(
-        {"email": email, "exp": datetime.now(timezone.utc) + timedelta(hours=24)},
+        {"email": email, "exp": datetime.now(timezone.utc) + timedelta(minutes=30)},
         app.config["SECRET_KEY"],
         algorithm="HS256"
     )

@@ -12,6 +12,7 @@ services:
   web:
     image: moodmirror_backend
     container_name: moodmirror_web
+    command: ["gunicorn", "-b", "0.0.0.0:5000", "--timeout", "300", "app:app"]
     ports:
       - "5000:5000"
     volumes:
