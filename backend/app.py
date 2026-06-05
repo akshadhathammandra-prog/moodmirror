@@ -140,7 +140,7 @@ def forgot_password():
         
     try:
         reset_token = jwt.encode(
-            {"email": email, "exp": datetime.now(timezone.utc) + timedelta(hours=1)},
+            {"email": email, "exp": datetime.now(timezone.utc) + timedelta(minutes=10)},
             app.config["SECRET_KEY"],
             algorithm="HS256"
         )
